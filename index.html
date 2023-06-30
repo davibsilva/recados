@@ -11,7 +11,7 @@
 <body>
     <div id="content">
         <h2>Vamos voltar a ser como antes?</h2>
-        <button class="btn" onclick="yes()">SIM</button>
+        <button id="yesButton" class="btn" onclick="yes()">SIM</button>
         <button class="btn" onclick="dodge(this)" onmouseover="dodge(this)">NÃO</button>
     </div>
 </body>
@@ -33,7 +33,7 @@
         color: white;
         border: none;
         padding: 20px;
-        width: 80px;
+        width: 100px;
         border-radius: 5px;
     }
 </style>
@@ -51,8 +51,25 @@
         btn.style.left = generateRandomPosition(10, 90);
     }
 
-    function generateRandomPosition(min, max) {
-        return (Math.random() * (max - min) + min) + "%";
+    function generateRandomPosition(min, max, left) {
+        let newPosition = (Math.random() * (max - min) + min) + "%";
+        if (left) {
+            return newPosition;
+        } else {
+            const yesBtn = document.querySelector("#yesButton");
+            const yesBtnBottomPosition = yesBtn.style.bottom;    
+            let validPosition = false
+            
+            while(!validPosition) {    
+                if (newPosition != yesBtnBottomPosition) {
+                    return validPosition = true
+                } else {
+                    newPosition = (Math.random() * (max - min) + min) + "%";
+                }
+            }
+            
+            return newPosition;
+        }
     }
 
 </script>
